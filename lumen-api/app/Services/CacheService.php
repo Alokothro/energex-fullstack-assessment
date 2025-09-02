@@ -2,31 +2,22 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 
 class CacheService
 {
     public function remember($key, $ttl, $callback)
     {
-        $cached = Redis::get($key);
-        
-        if ($cached) {
-            return json_decode($cached, true);
-        }
-
-        $data = $callback();
-        Redis::setex($key, $ttl, json_encode($data));
-        
-        return $data;
+        return Cache::remember($key, $ttl, $callback);
     }
 
     public function forget($key)
     {
-        return Redis::del($key);
+        return Cache::forget($key);
     }
 
     public function flush()
     {
-        return Redis::flushall();
+        return Cache::flush();
     }
 }
