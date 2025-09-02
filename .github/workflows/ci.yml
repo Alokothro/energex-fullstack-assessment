@@ -42,17 +42,20 @@ jobs:
         composer install --prefer-dist --no-progress
         cp .env.example .env
         chmod +x artisan
-        echo "JWT_SECRET=test-secret-key-for-ci" >> .env
+        echo "JWT_SECRET=test-256-bit-secret-test-256-bit-secret-test-256-bit-secret" >> .env
     
     - name: Run migrations
       working-directory: ./lumen-api
       env:
+        APP_ENV: testing
         DB_CONNECTION: mysql
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_DATABASE: test_db
         DB_USERNAME: root
         DB_PASSWORD: password
+        CACHE_DRIVER: array
+        JWT_SECRET: test-256-bit-secret-test-256-bit-secret-test-256-bit-secret
       run: php artisan migrate --force
     
     - name: Run PHPUnit tests
@@ -67,7 +70,7 @@ jobs:
         DB_PASSWORD: password
         REDIS_HOST: 127.0.0.1
         CACHE_DRIVER: array
-        JWT_SECRET: test-secret-key-for-ci
+        JWT_SECRET: test-256-bit-secret-test-256-bit-secret-test-256-bit-secret
       run: vendor/bin/phpunit --no-coverage
 
   test-node:
