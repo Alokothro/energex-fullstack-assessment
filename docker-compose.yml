@@ -49,6 +49,7 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       JWT_SECRET: your-256-bit-secret-your-256-bit-secret-your-256-bit-secret
+      JWT_ALGO: HS256
     networks:
       - microservice-network
 

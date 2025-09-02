@@ -20,5 +20,6 @@
         <env name="DB_USERNAME" value="app_user"/>
         <env name="DB_PASSWORD" value="app_password"/>
         <env name="JWT_SECRET" value="your-256-bit-secret-your-256-bit-secret-your-256-bit-secret"/>
+        <env name="JWT_ALGO" value="HS256"/>
     </php>
 </phpunit>

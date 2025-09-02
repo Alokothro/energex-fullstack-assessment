@@ -16,6 +16,7 @@ class DebugTest extends TestCase
         echo "DB_USERNAME: " . env('DB_USERNAME') . "\n";
         echo "JWT_SECRET length: " . strlen(env('JWT_SECRET', '')) . " chars\n";
         echo "JWT_SECRET: " . (env('JWT_SECRET') ? substr(env('JWT_SECRET'), 0, 20) . '...' : 'NULL') . "\n";
+        echo "JWT_ALGO: " . env('JWT_ALGO', 'NULL') . "\n";
         echo "CACHE_DRIVER: " . env('CACHE_DRIVER') . "\n";
         
         // Test database connection
