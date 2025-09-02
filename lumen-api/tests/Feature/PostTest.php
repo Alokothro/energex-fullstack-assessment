@@ -11,26 +11,6 @@ class PostTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected function getAuthToken()
-    {
-        $response = $this->json('POST', '/api/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
-        ]);
-
-        $content = json_decode($response->response->getContent());
-        
-        // Debug output for CI
-        if (!isset($content->token)) {
-            echo "\nRegistration failed with status: " . $response->response->getStatusCode();
-            echo "\nResponse content: " . $response->response->getContent();
-            $this->fail('Registration failed - no token returned');
-        }
-        
-        return $content->token;
-    }
 
     public function testCanGetAllPosts()
     {
@@ -45,24 +25,14 @@ class PostTest extends TestCase
 
     public function testCanCreatePost()
     {
-        // Ensure migrations are run
-        $this->artisan('migrate');
-        
-        $token = $this->getAuthToken();
+        // Create and authenticate user
+        $user = User::factory()->create();
 
-        // Debug: Check if user was created
-        $userCount = \App\Models\User::count();
-        echo "\nUsers in database after registration: $userCount\n";
-
-        $response = $this->json('POST', '/api/posts', [
-            'title' => 'Test Post',
-            'content' => 'This is a test post content.',
-        ], ['Authorization' => "Bearer $token"]);
-
-        if ($response->response->getStatusCode() !== 201) {
-            echo "\nPost creation failed with status: " . $response->response->getStatusCode();
-            echo "\nResponse: " . $response->response->getContent() . "\n";
-        }
+        $response = $this->actingAs($user)
+            ->json('POST', '/api/posts', [
+                'title' => 'Test Post',
+                'content' => 'This is a test post content.',
+            ]);
 
         $response->seeStatusCode(201);
         $response->seeJsonStructure([
