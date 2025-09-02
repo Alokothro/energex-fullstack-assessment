@@ -48,7 +48,7 @@ services:
       DB_PASSWORD: app_password
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      JWT_SECRET: your-secret-key-here
+      JWT_SECRET: your-256-bit-secret-your-256-bit-secret-your-256-bit-secret
     networks:
       - microservice-network
 
