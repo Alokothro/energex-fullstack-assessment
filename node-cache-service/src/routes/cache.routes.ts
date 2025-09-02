@@ -7,7 +7,7 @@ const router = Router();
 const cacheService = new CacheService();
 const postService = new PostService();
 
-router.get('/posts', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/posts', async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const cacheKey = 'posts:all';
     
@@ -29,7 +29,7 @@ router.get('/posts', async (req: Request, res: Response, next: NextFunction) => 
   }
 });
 
-router.get('/posts/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/posts/:id', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params;
     const cacheKey = `posts:${id}`;
@@ -42,7 +42,8 @@ router.get('/posts/:id', async (req: Request, res: Response, next: NextFunction)
       post = await postService.getPostById(parseInt(id));
       
       if (!post) {
-        return res.status(404).json({ error: 'Post not found' });
+        res.status(404).json({ error: 'Post not found' });
+        return;
       }
       
       // Store in cache
@@ -56,7 +57,7 @@ router.get('/posts/:id', async (req: Request, res: Response, next: NextFunction)
   }
 });
 
-router.delete('/flush', async (req: Request, res: Response, next: NextFunction) => {
+router.delete('/flush', async (_req: Request, res: Response, next: NextFunction) => {
   try {
     await cacheService.flush();
     res.json({ message: 'Cache flushed successfully' });
