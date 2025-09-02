@@ -1,4 +1,4 @@
-# Microservice Assessment - Full Stack Application
+# EnergeX Fullstack Assessment - Microservice Architecture
 
 A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript), Redis caching, MySQL database, and React.js frontend.
 
@@ -64,8 +64,8 @@ A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript)
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd microservice-assessment
+git clone https://github.com/Alokothro/energex-fullstack-assessment.git
+cd energex-fullstack-assessment
 ```
 
 2. Copy environment files:
@@ -304,4 +304,4 @@ This project is created for assessment purposes.
 
 ## Author
 
-Created as part of the Full-Stack Developer Technical Assessment.
+Created as part of the EnergeX AI Full-Stack Developer Technical Assessment.
