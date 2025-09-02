@@ -39,9 +39,9 @@ jobs:
     - name: Install Composer dependencies
       working-directory: ./lumen-api
       run: |
-        composer install --prefer-dist --no-progress --no-suggest
+        composer install --prefer-dist --no-progress
         cp .env.example .env
-        php artisan key:generate || true
+        chmod +x artisan
     
     - name: Run migrations
       working-directory: ./lumen-api
