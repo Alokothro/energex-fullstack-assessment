@@ -29,6 +29,20 @@ class DebugTest extends TestCase
             foreach ($tables as $table) {
                 echo "  - " . array_values($table)[0] . "\n";
             }
+            
+            // Try to run migrations manually
+            try {
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                echo "✓ Migrations run successfully\n";
+                
+                $tablesAfter = $pdo->query("SHOW TABLES")->fetchAll();
+                echo "Tables after migration: " . count($tablesAfter) . "\n";
+                foreach ($tablesAfter as $table) {
+                    echo "  - " . array_values($table)[0] . "\n";
+                }
+            } catch (\Exception $e) {
+                echo "✗ Migration error: " . $e->getMessage() . "\n";
+            }
         } catch (\Exception $e) {
             echo "✗ Database error: " . $e->getMessage() . "\n";
         }

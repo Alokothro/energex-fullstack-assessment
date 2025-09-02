@@ -45,12 +45,24 @@ class PostTest extends TestCase
 
     public function testCanCreatePost()
     {
+        // Ensure migrations are run
+        $this->artisan('migrate');
+        
         $token = $this->getAuthToken();
+
+        // Debug: Check if user was created
+        $userCount = \App\Models\User::count();
+        echo "\nUsers in database after registration: $userCount\n";
 
         $response = $this->json('POST', '/api/posts', [
             'title' => 'Test Post',
             'content' => 'This is a test post content.',
         ], ['Authorization' => "Bearer $token"]);
+
+        if ($response->response->getStatusCode() !== 201) {
+            echo "\nPost creation failed with status: " . $response->response->getStatusCode();
+            echo "\nResponse: " . $response->response->getContent() . "\n";
+        }
 
         $response->seeStatusCode(201);
         $response->seeJsonStructure([
