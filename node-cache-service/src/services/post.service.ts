@@ -1,0 +1,73 @@
+import { getPool } from '../config/database';
+import { Post } from '../types/post.types';
+import { logger } from '../config/logger';
+
+export class PostService {
+  async getAllPosts(): Promise<Post[]> {
+    try {
+      const pool = getPool();
+      const [rows] = await pool.execute(`
+        SELECT 
+          p.id, p.title, p.content, p.user_id, p.created_at, p.updated_at,
+          u.id as user_id, u.name as user_name, u.email as user_email
+        FROM posts p
+        JOIN users u ON p.user_id = u.id
+        ORDER BY p.created_at DESC
+      `);
+
+      return (rows as any[]).map(row => ({
+        id: row.id,
+        title: row.title,
+        content: row.content,
+        user_id: row.user_id,
+        created_at: row.created_at,
+        updated_at: row.updated_at,
+        user: {
+          id: row.user_id,
+          name: row.user_name,
+          email: row.user_email
+        }
+      }));
+    } catch (error) {
+      logger.error('Error fetching posts from database:', error);
+      throw error;
+    }
+  }
+
+  async getPostById(id: number): Promise<Post | null> {
+    try {
+      const pool = getPool();
+      const [rows] = await pool.execute(`
+        SELECT 
+          p.id, p.title, p.content, p.user_id, p.created_at, p.updated_at,
+          u.id as user_id, u.name as user_name, u.email as user_email
+        FROM posts p
+        JOIN users u ON p.user_id = u.id
+        WHERE p.id = ?
+      `, [id]);
+
+      const posts = rows as any[];
+      if (posts.length === 0) {
+        return null;
+      }
+
+      const row = posts[0];
+      return {
+        id: row.id,
+        title: row.title,
+        content: row.content,
+        user_id: row.user_id,
+        created_at: row.created_at,
+        updated_at: row.updated_at,
+        user: {
+          id: row.user_id,
+          name: row.user_name,
+          email: row.user_email
+        }
+      };
+    } catch (error) {
+      logger.error(`Error fetching post ${id} from database:`, error);
+      throw error;
+    }
+  }
+}

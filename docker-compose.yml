@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: microservice-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: microservice_db
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - microservice-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: microservice-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - microservice-network
+
+  lumen-api:
+    build:
+      context: ./lumen-api
+      dockerfile: Dockerfile
+    container_name: microservice-lumen
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./lumen-api:/var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: microservice_db
+      DB_USERNAME: app_user
+      DB_PASSWORD: app_password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: your-secret-key-here
+    networks:
+      - microservice-network
+
+  node-cache:
+    build:
+      context: ./node-cache-service
+      dockerfile: Dockerfile
+    container_name: microservice-node-cache
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./node-cache-service:/app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: microservice_db
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+      PORT: 3001
+    networks:
+      - microservice-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: microservice-frontend
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:8000/api
+      REACT_APP_CACHE_URL: http://localhost:3001/cache
+    networks:
+      - microservice-network
+
+networks:
+  microservice-network:
+    driver: bridge
