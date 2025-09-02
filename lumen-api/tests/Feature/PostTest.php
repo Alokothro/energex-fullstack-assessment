@@ -21,6 +21,14 @@ class PostTest extends TestCase
         ]);
 
         $content = json_decode($response->response->getContent());
+        
+        // Debug output for CI
+        if (!isset($content->token)) {
+            echo "\nRegistration failed with status: " . $response->response->getStatusCode();
+            echo "\nResponse content: " . $response->response->getContent();
+            $this->fail('Registration failed - no token returned');
+        }
+        
         return $content->token;
     }
 
