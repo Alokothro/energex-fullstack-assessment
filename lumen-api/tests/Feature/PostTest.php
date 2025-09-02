@@ -20,7 +20,8 @@ class PostTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        return json_decode($response->response->getContent())->token;
+        $content = json_decode($response->response->getContent());
+        return $content->token;
     }
 
     public function testCanGetAllPosts()

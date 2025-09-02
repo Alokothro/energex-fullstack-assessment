@@ -18,6 +18,10 @@ class AuthTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
+        if ($response->response->getStatusCode() != 201) {
+            dump($response->response->getContent());
+        }
+
         $response->seeStatusCode(201);
         $response->seeJsonStructure([
             'user' => ['id', 'name', 'email'],

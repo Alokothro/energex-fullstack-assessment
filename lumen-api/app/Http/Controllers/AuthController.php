@@ -43,7 +43,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        if (!$token = Auth::attempt($credentials)) {
+        if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -52,18 +52,18 @@ class AuthController extends Controller
 
     public function me()
     {
-        return response()->json(Auth::user());
+        return response()->json(JWTAuth::user());
     }
 
     public function logout()
     {
-        Auth::logout();
+        JWTAuth::logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function refresh()
     {
-        return $this->respondWithToken(Auth::refresh());
+        return $this->respondWithToken(JWTAuth::refresh());
     }
 
     protected function respondWithToken($token)
@@ -71,8 +71,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
-            'user' => Auth::user()
+            'expires_in' => JWTAuth::factory()->getTTL() * 60,
+            'user' => JWTAuth::user()
         ]);
     }
 }
