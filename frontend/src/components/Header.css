@@ -14,20 +14,20 @@
   align-items: center;
   height: 60px;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
   .header-container {
     height: 80px;
     flex-wrap: nowrap;
-    padding: 0 40px;
+    padding: 0 60px;
   }
 }
 
 @media (min-width: 1240px) {
   .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0 120px;
   }
 }
 
