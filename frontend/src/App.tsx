@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
 import PostList from './components/PostList';
+import Snowflakes from './components/Snowflakes';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
+          <Snowflakes />
           <Header />
           <main className="main-content">
             <Routes>
