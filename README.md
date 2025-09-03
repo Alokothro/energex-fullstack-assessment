@@ -1,4 +1,4 @@
-# EnergeX Fullstack Assessment - Microservice Architecture
+# EnergeX Fullstack Assessment
 
 A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript), Redis caching, MySQL database, and React.js frontend.
 
