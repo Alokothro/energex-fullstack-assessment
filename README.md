@@ -25,7 +25,7 @@ A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript)
 
 ## Features
 
-### Backend (Lumen - PHP)
+### Backend (Lumen - PHP) (https://energex-assessment.onrender.com)
 - ✅ RESTful API with JWT authentication
 - ✅ User registration and login
 - ✅ CRUD operations for posts
@@ -40,7 +40,7 @@ A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript)
 - ✅ Performance optimization
 - ✅ Jest tests
 
-### Frontend (React.js)
+### Frontend (React.js) (https://energex-frontend.onrender.com)
 - ✅ User authentication UI
 - ✅ Post creation and viewing
 - ✅ Responsive design
