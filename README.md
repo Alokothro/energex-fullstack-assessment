@@ -52,6 +52,8 @@ A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript)
 - ✅ Docker Compose orchestration
 - ✅ GitHub Actions CI/CD
 - ✅ Automated testing
+- ✅ Render.com deployment support
+- ✅ PostgreSQL and MySQL support
 
 ## Quick Start
 
@@ -88,6 +90,57 @@ docker-compose exec lumen-api php artisan migrate
 - Frontend: http://localhost:3000
 - Lumen API: http://localhost:8000
 - Node Cache Service: http://localhost:3001
+
+## Production Deployment (Render.com)
+
+### Live Application
+- Frontend: https://energex-frontend.onrender.com
+- API: https://energex-api.onrender.com/api
+- Cache Service: https://energex-cache.onrender.com
+
+### Deploying to Render
+
+1. **Create PostgreSQL Database** in Render Dashboard
+   - Name: `energex-db`
+   - Plan: Free tier
+
+2. **Deploy Lumen API** (Web Service)
+   - Root Directory: `./lumen-api`
+   - Runtime: Docker
+   - Environment Variables:
+     ```
+     APP_ENV=production
+     DB_CONNECTION=pgsql
+     DATABASE_URL=(from PostgreSQL)
+     JWT_SECRET=(generate secure key)
+     JWT_ALGO=HS256
+     CACHE_DRIVER=array
+     ```
+
+3. **Deploy Node Cache Service** (Web Service)
+   - Root Directory: `./node-cache-service`
+   - Runtime: Docker
+   - Environment Variables:
+     ```
+     NODE_ENV=production
+     PORT=3001
+     DB_CONNECTION=pgsql
+     DATABASE_URL=(from PostgreSQL)
+     ```
+
+4. **Deploy React Frontend** (Static Site)
+   - Root Directory: `./frontend`
+   - Build Command: `npm install && npm run build`
+   - Publish Directory: `build`
+   - Environment Variables:
+     ```
+     REACT_APP_API_URL=https://energex-api.onrender.com/api
+     ```
+
+5. **Run Migrations** in API service Shell:
+   ```bash
+   php artisan migrate --force
+   ```
 
 ## API Endpoints
 
@@ -292,11 +345,15 @@ docker-compose exec lumen-api chmod -R 777 storage
 
 - ✅ Docker containerization
 - ✅ CI/CD with GitHub Actions
-- ✅ Comprehensive testing
+- ✅ Comprehensive testing (PHPUnit, Jest)
 - ✅ TypeScript for type safety
 - ✅ Redis caching with TTL
 - ✅ JWT refresh tokens
 - ✅ CORS configuration
+- ✅ Production deployment on Render.com
+- ✅ PostgreSQL and MySQL database support
+- ✅ Automated deployments on push
+- ✅ Environment-based configuration
 
 ## License
 
