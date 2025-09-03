@@ -1,23 +1,30 @@
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-.DS_Store
-
 # Dependencies
 node_modules/
 vendor/
+
+# Environment files
 .env
-*.log
+.env.local
 
-# Build
-dist/
+# Build outputs
 build/
-*.cache
+dist/
 
-# Docker
-docker/data/
+# Logs
+*.log
+logs/
+
+# Docker volumes
+docker/mysql/*
+docker/redis/*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Testing
 coverage/
