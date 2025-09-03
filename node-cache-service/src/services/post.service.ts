@@ -1,12 +1,11 @@
-import { getPool } from '../config/database';
+import { query } from '../config/database';
 import { Post } from '../types/post.types';
 import { logger } from '../config/logger';
 
 export class PostService {
   async getAllPosts(): Promise<Post[]> {
     try {
-      const pool = getPool();
-      const [rows] = await pool.execute(`
+      const rows = await query(`
         SELECT 
           p.id, p.title, p.content, p.user_id, p.created_at, p.updated_at,
           u.id as user_id, u.name as user_name, u.email as user_email
@@ -36,14 +35,15 @@ export class PostService {
 
   async getPostById(id: number): Promise<Post | null> {
     try {
-      const pool = getPool();
-      const [rows] = await pool.execute(`
+      // Use $1 for PostgreSQL, ? for MySQL
+      const paramPlaceholder = process.env.DB_CONNECTION === 'pgsql' ? '$1' : '?';
+      const rows = await query(`
         SELECT 
           p.id, p.title, p.content, p.user_id, p.created_at, p.updated_at,
           u.id as user_id, u.name as user_name, u.email as user_email
         FROM posts p
         JOIN users u ON p.user_id = u.id
-        WHERE p.id = ?
+        WHERE p.id = ${paramPlaceholder}
       `, [id]);
 
       const posts = rows as any[];
