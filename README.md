@@ -58,11 +58,29 @@ A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript)
 ## Quick Start
 
 ### Prerequisites
-- Docker and Docker Compose
-- Node.js 18+ (for local development)
-- PHP 8.2+ and Composer (for local development)
+- Node.js 18+ (for frontend)
+- Docker and Docker Compose (only for local backend development)
+- PHP 8.2+ and Composer (only for local backend development)
 
-### Running with Docker (Recommended)
+### Quick Start - Frontend Only (Easiest)
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Alokothro/energex-fullstack-assessment.git
+cd energex-fullstack-assessment/frontend
+```
+
+2. Install dependencies and start:
+```bash
+npm install
+npm start
+```
+
+3. Access the application at http://localhost:3000
+   - The frontend automatically connects to the live deployed backend
+   - No Docker or backend setup required!
+
+### Running Full Stack with Docker (Advanced)
 
 1. Clone the repository:
 ```bash
@@ -88,8 +106,11 @@ docker-compose exec lumen-api php artisan migrate
 
 5. Access the applications:
 - Frontend: http://localhost:3000
-- Lumen API: http://localhost:8000
-- Node Cache Service: http://localhost:3001
+
+**Note**: The frontend connects to the live deployed APIs by default. To use local backend services:
+- Lumen API: http://localhost:8000 (requires Docker running)
+- Node Cache Service: http://localhost:3001 (requires Docker running)
+- Update `frontend/.env.local` to point to local URLs
 
 ## Production Deployment (Render.com)
 
