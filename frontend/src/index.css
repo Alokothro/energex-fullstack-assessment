@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Bebas+Neue&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
 * {
   margin: 0;
@@ -11,39 +11,20 @@ body {
   font-family: 'Courier Prime', 'Courier New', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #0a0a0a;
-  color: #e8e6e3;
+  background: #000000;
+  color: #ffffff;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Vintage noise texture overlay */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.03;
-  z-index: -1;
-  background: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.03) 2px,
-      rgba(255, 255, 255, 0.03) 4px
-    );
-  pointer-events: none;
-}
 
 code {
   font-family: 'Courier Prime', 'Courier New', monospace;
-  background: rgba(139, 69, 19, 0.2);
+  background: #f0f0f0;
   padding: 2px 6px;
-  border-radius: 3px;
+  border-radius: 0;
+  color: #000000;
 }
 
 /* Scrollbar styling */
@@ -52,14 +33,14 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8b4513;
-  border-radius: 5px;
+  background: #333333;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a0522d;
+  background: #555555;
 }
