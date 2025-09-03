@@ -22,32 +22,29 @@
 
 .posts-container::before {
   background-image: 
-    radial-gradient(circle at 10% 20%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 80% 80%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 40% 40%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 90% 10%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 30% 70%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 70% 30%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 20% 90%, #CD7F32 0%, transparent 1%),
-    radial-gradient(circle at 60% 60%, #CD7F32 0%, transparent 1%);
-  background-size: 10% 10%;
-  animation: particlesFall 25s linear infinite;
-  opacity: 0.3;
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 25%, transparent 26%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 25%, transparent 26%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 25%, transparent 26%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 25%, transparent 26%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 25%, transparent 26%);
+  background-size: 8px 8px, 6px 6px, 10px 10px, 5px 5px, 7px 7px;
+  background-position: 0% 0%, 20% 20%, 40% 5%, 60% 80%, 80% 10%;
+  animation: particlesFall 15s linear infinite;
+  opacity: 0.6;
 }
 
 .posts-container::after {
   background-image: 
-    radial-gradient(circle at 15% 30%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 85% 70%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 45% 50%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 95% 20%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 25% 80%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 75% 40%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 50% 95%, #CD7F32 0%, transparent 1.5%),
-    radial-gradient(circle at 35% 15%, #CD7F32 0%, transparent 1.5%);
-  background-size: 15% 15%;
-  animation: particlesFall 35s linear infinite;
-  opacity: 0.2;
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 30%, transparent 31%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 30%, transparent 31%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 30%, transparent 31%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 30%, transparent 31%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 30%, transparent 31%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 30%, transparent 31%);
+  background-size: 12px 12px, 9px 9px, 6px 6px, 11px 11px, 8px 8px, 10px 10px;
+  background-position: 10% 10%, 30% 60%, 50% 30%, 70% 70%, 90% 40%, 15% 85%;
+  animation: particlesFall 20s linear infinite;
+  opacity: 0.5;
 }
 
 @keyframes particlesFall {
@@ -77,17 +74,14 @@
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 50%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 60% 20%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 80% 70%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 40% 90%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 10% 30%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 90% 40%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 30% 60%, #CD7F32 0%, transparent 0.5%),
-    radial-gradient(circle at 70% 85%, #CD7F32 0%, transparent 0.5%);
-  background-size: 8% 8%;
-  animation: particlesFall 20s linear infinite, sparkle 4s ease-in-out infinite;
-  opacity: 0.15;
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 35%, transparent 36%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 35%, transparent 36%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 35%, transparent 36%),
+    radial-gradient(circle, #CD7F32 0%, #CD7F32 35%, transparent 36%);
+  background-size: 4px 4px, 5px 5px, 3px 3px, 6px 6px;
+  background-position: 25% 25%, 75% 75%, 50% 50%, 10% 90%;
+  animation: particlesFall 25s linear infinite, sparkle 3s ease-in-out infinite;
+  opacity: 0.4;
   pointer-events: none;
   z-index: 0;
 }
