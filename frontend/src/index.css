@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  background: #000000;
+}
+
 body {
   margin: 0;
   font-family: 'Courier Prime', 'Courier New', monospace;
@@ -16,6 +20,11 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  background: #000000;
 }
 
 

@@ -7,47 +7,83 @@
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
+  height: 60px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .header-container {
+    height: 80px;
+    flex-wrap: nowrap;
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1240px) {
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
 
 .logo {
   font-family: 'Courier Prime', monospace;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   color: #CD7F32;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
   font-family: 'Courier Prime', monospace;
   margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    gap: 15px;
+  }
 }
 
 .nav-link {
   color: #ffffff;
   text-decoration: none;
-  padding: 8px 16px;
+  padding: 6px 10px;
   border: 2px solid #ffffff;
   border-radius: 0;
   transition: all 0.2s;
   background: transparent;
-  font-size: 13px;
-  letter-spacing: 0.5px;
+  font-size: 11px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .nav-link {
+    padding: 8px 16px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
 }
 
 .nav-link:hover {
@@ -59,9 +95,15 @@
 .register-link {
   background: #CD7F32;
   border: 2px solid #CD7F32;
-  padding: 8px 20px;
+  padding: 6px 12px;
   font-weight: 700;
   color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .register-link {
+    padding: 8px 20px;
+  }
 }
 
 .register-link:hover {
@@ -72,23 +114,45 @@
 
 .welcome-text {
   color: #CD7F32;
-  font-size: 13px;
+  font-size: 11px;
   font-family: 'Courier Prime', monospace;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .welcome-text {
+    display: inline;
+  }
+}
+
+@media (min-width: 768px) {
+  .welcome-text {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
 }
 
 .logout-button {
   background: #000000;
   color: #ffffff;
   border: 2px solid #ffffff;
-  padding: 8px 16px;
+  padding: 6px 10px;
   border-radius: 0;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 11px;
   transition: all 0.2s;
   font-family: 'Courier Prime', monospace;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+}
+
+@media (min-width: 768px) {
+  .logout-button {
+    padding: 8px 16px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
 }
 
 .logout-button:hover {
