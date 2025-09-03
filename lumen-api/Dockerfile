@@ -40,5 +40,5 @@ RUN chown -R www-data:www-data /var/www \
 # Expose port
 EXPOSE 8000
 
-# Start PHP server
-CMD php -S 0.0.0.0:8000 -t public
+# Start PHP server with router script
+CMD php -S 0.0.0.0:8000 -t public public/index.php
