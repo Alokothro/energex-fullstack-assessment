@@ -24,7 +24,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      // Don't redirect here, let the component handle it
+      // This prevents the "Not Found" error
     }
     return Promise.reject(error);
   }

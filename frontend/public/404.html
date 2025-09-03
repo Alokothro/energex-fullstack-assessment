@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Microservice App</title>
+    <script>
+      // This script handles client-side routing for SPAs on static hosts
+      // Redirect to the base URL with the path as a query parameter
+      const path = window.location.pathname;
+      if (path !== '/' && path !== '/index.html') {
+        // Store the path and reload at root
+        sessionStorage.setItem('redirectPath', path);
+        window.location.replace('/');
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+  </body>
+</html>
