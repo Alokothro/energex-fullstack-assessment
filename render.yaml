@@ -1,0 +1,84 @@
+services:
+  # Lumen API Service
+  - type: web
+    name: energex-api
+    runtime: docker
+    dockerfilePath: ./lumen-api/Dockerfile
+    dockerContext: ./lumen-api
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: energex-db
+          property: connectionString
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: energex-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGO
+        value: HS256
+      - key: CACHE_DRIVER
+        value: redis
+      - key: NODE_CACHE_URL
+        value: https://energex-cache.onrender.com
+
+  # Node.js Cache Service
+  - type: web
+    name: energex-cache
+    runtime: docker
+    dockerfilePath: ./node-cache-service/Dockerfile
+    dockerContext: ./node-cache-service
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: energex-redis
+          property: connectionString
+      - key: DATABASE_URL
+        fromDatabase:
+          name: energex-db
+          property: connectionString
+      - key: DB_CONNECTION
+        value: pgsql
+
+  # React Frontend
+  - type: web
+    name: energex-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://energex-api.onrender.com
+      - key: REACT_APP_CACHE_URL
+        value: https://energex-cache.onrender.com
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+
+databases:
+  - name: energex-db
+    databaseName: microservice_db
+    user: app_user
+    plan: free
+
+services:
+  - type: redis
+    name: energex-redis
+    ipAllowList: []
+    plan: free
