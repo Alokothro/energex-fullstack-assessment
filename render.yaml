@@ -77,7 +77,6 @@ databases:
     user: app_user
     plan: free
 
-services:
   - type: redis
     name: energex-redis
     ipAllowList: []
