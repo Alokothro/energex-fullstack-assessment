@@ -2,6 +2,10 @@
 
 A comprehensive microservice architecture with Lumen (PHP), Node.js (TypeScript), Redis caching, MySQL database, and React.js frontend.
 
+## 🎥 Video Demo
+
+**Watch my solution walkthrough:** [https://www.loom.com/share/54c535511dfa4b819f35b7c04058028c?sid=6dfee5d4-50b5-44c6-be1e-5a04aa27ea1e](https://www.loom.com/share/54c535511dfa4b819f35b7c04058028c?sid=6dfee5d4-50b5-44c6-be1e-5a04aa27ea1e)
+
 ## Architecture Overview
 
 ```
